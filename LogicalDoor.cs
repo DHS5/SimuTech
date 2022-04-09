@@ -1,0 +1,65 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class LogicalDoor : LogicalComponent
+{
+    private int totalSources = 0;
+    
+    public LogicalDoor(string _name, int _posX, int _posY) : base(_name, _posX, _posY) { }
+
+
+
+
+    public override void OnValueChange()
+    {
+        Debug.Log(this + " : value changed");
+        // Browse on the targets and actualize them
+        foreach (LogicalComponent LC in targets)
+        {
+            Debug.Log(this + " : target = " + LC);
+            LC.Actualization();
+        }
+    }
+
+    protected override void Calculate()
+    {
+        Debug.Log(this + " : exit = " + exit);
+        OnValueChange();
+    }
+
+    public override void Actualization()
+    {
+        for (int i = 0; i < maxSources; i++)
+        {
+            entries[i] = sources[i].exit;
+            Debug.Log(this + " : entry " + i + " = " + entries[i]);
+        }
+        
+        Calculate();
+    }
+
+    public override void AddSource(LogicalComponent s, int sourceNumber)
+    {
+        if (!targets.Contains(s) && sourceNumber < maxSources)
+        {
+            // Add a source to the door and increment totalSources if the source was previously null
+            if (sources[sourceNumber] == null) totalSources++;
+            sources[sourceNumber] = s;
+            entries[sourceNumber] = s.exit;
+            // Add the door as the source's target
+            s.targets.Add(this);
+
+            Debug.Log(this + " : source " + sourceNumber + " = " + s);
+
+            // Actualise the door's exit value
+            Actualization();
+        }
+
+        else
+        { 
+            Debug.Assert(targets.Contains(s), "Can't have a target as a source");
+            Debug.Assert(sourceNumber > maxSources, "Source Number > Maximum Sources Number");
+        }
+    }
+}
