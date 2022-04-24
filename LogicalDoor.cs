@@ -17,26 +17,29 @@ public class LogicalDoor : LogicalComponent
         // Browse on the targets and actualize them
         foreach (LogicalComponent LC in targets)
         {
-            Debug.Log(this + " : target = " + LC);
+            Debug.Log(name + " : target = " + LC.name);
             LC.Actualization();
         }
     }
 
     protected override void Calculate()
     {
-        Debug.Log(this + " : exit = " + exit);
+        Debug.Log(name + " : exit = " + exit);
         OnValueChange();
     }
 
     public override void Actualization()
     {
-        for (int i = 0; i < maxSources; i++)
+        if (totalSources == maxSources)
         {
-            entries[i] = sources[i].exit;
-            Debug.Log(this + " : entry " + i + " = " + entries[i]);
+            for (int i = 0; i < maxSources; i++)
+            {
+                entries[i] = sources[i].exit;
+                Debug.Log(name + " : entry " + i + " = " + entries[i]);
+            }
+
+            Calculate();
         }
-        
-        Calculate();
     }
 
     public override void AddSource(LogicalComponent s, int sourceNumber)
@@ -50,7 +53,7 @@ public class LogicalDoor : LogicalComponent
             // Add the door as the source's target
             s.targets.Add(this);
 
-            Debug.Log(this + " : source " + sourceNumber + " = " + s);
+            Debug.Log(name + " : source " + sourceNumber + " = " + s.name);
 
             // Actualise the door's exit value
             Actualization();

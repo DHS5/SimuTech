@@ -14,11 +14,11 @@ public class LogicalEntry : LogicalComponent
     /// </summary>
     public override void OnValueChange()
     {
-        Debug.Log(this + " : value changed");
+        Debug.Log(name + " : value changed");
         // Browse on the targets and actualize them
         foreach (LogicalComponent LC in targets)
         {
-            Debug.Log(this + " : target = " + LC);
+            Debug.Log(name + " : target = " + LC.name);
             LC.Actualization();
         }
     }

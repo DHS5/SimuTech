@@ -15,7 +15,7 @@ public class LogicalExit : LogicalComponent
     public override void Actualization()
     {
         exit = sources[0].exit;
-        Debug.Log(this + " : exit = " + exit);
+        Debug.Log(name + " : exit = " + exit);
 
         OnValueChange();
     }
@@ -32,7 +32,7 @@ public class LogicalExit : LogicalComponent
         // Add the exit as the source's target
         s.targets.Add(this);
 
-        Debug.Log(this + " : source = " + s);
+        Debug.Log(name + " : source = " + s.name);
 
         // Actualise the exit value
         Actualization();

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public abstract class LogicalComponent
 {
+    /// <summary>
+    /// List of the sources of the component
+    /// </summary>
     public List<LogicalComponent> sources = new List<LogicalComponent>();
 
     /// <summary>
@@ -11,13 +14,18 @@ public abstract class LogicalComponent
     /// </summary>
     protected int maxSources;
 
+    /// <summary>
+    /// List of the targets of the component
+    /// </summary>
     public List<LogicalComponent> targets = new List<LogicalComponent>();
 
-    protected string name;
+    public string name;
     protected int posX;
     protected int posY;
 
-
+    /// <summary>
+    /// List of the entries's value of the component
+    /// </summary>
     public List<int> entries = new List<int>();
     public int exit = 0;
 
@@ -56,11 +64,11 @@ public abstract class LogicalComponent
     /// </summary>
     public virtual void OnValueChange()
     {
-        Debug.Log(this + " : value changed");
+        Debug.Log(name + " : value changed");
         // Browse on the targets and actualize them
         foreach (LogicalComponent LC in targets)
         {
-            Debug.Log(this + " : target = " + LC);
+            Debug.Log(name + " : target = " + LC.name);
             LC.Actualization();
         }
     }
