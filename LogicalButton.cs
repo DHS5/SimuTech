@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public class LogicalButton : LogicalEntry
 {
-    public LogicalButton(string _name, int _posX, int _posY) : base(_name, _posX, _posY)
+    public LogicalButton(string _name, int _posX, int _posY, Canvas canvas) : base(_name, _posX, _posY)
     {
         // Creates a button
         DefaultControls.Resources uiResources = new DefaultControls.Resources();
         GameObject button = DefaultControls.CreateButton(uiResources);
         // Sets its position and name
-        button.transform.SetParent(Main.Instance.canvas.transform);
+        button.transform.SetParent(canvas.transform);
         button.transform.localPosition = new Vector2(posX, posY);
         button.name = name;
         button.GetComponentInChildren<Text>().text = name;

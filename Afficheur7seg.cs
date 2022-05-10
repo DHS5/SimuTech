@@ -6,11 +6,11 @@ public class Afficheur7seg : LogicalExit
 {
     public List<LogicalLED> led = new List<LogicalLED>();
 
-    public Afficheur7seg(string _name, int _posX, int _posY, Sprite _sprite) : base(_name, _posX, _posY)
+    public Afficheur7seg(string _name, int _posX, int _posY, Sprite _sprite, Canvas canvas) : base(_name, _posX, _posY)
     {
         for (int i = 0; i < 7; i++)
         {
-            led.Add(new LogicalLED(name + "_led_" + i, PosX(i), PosY(i), _sprite));
+            led.Add(new LogicalLED(name + "_led_" + i, PosX(i), PosY(i), _sprite, canvas));
             led[i].led.transform.localScale /= 1.5f;
         }
 

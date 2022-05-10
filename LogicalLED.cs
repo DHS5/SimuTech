@@ -12,13 +12,13 @@ public class LogicalLED : LogicalExit
 
     private Image image;
 
-    public LogicalLED(string _name, int _posX, int _posY, Sprite _sprite) : base(_name, _posX, _posY)
+    public LogicalLED(string _name, int _posX, int _posY, Sprite _sprite, Canvas canvas) : base(_name, _posX, _posY)
     {
         // Creates a LED (image)
         DefaultControls.Resources uiResources = new DefaultControls.Resources();
         led = DefaultControls.CreateImage(uiResources);
         // Sets its position and name
-        led.transform.SetParent(Main.Instance.canvas.transform);
+        led.transform.SetParent(canvas.transform);
         led.transform.localPosition = new Vector2(posX, posY);
         led.name = name;
         image = led.GetComponentInChildren<Image>();

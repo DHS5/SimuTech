@@ -8,12 +8,12 @@ public class LogicalToggle : LogicalEntry
     private GameObject toggle;
 
 
-    public LogicalToggle(string _name, int _posX, int _posY) : base(_name, _posX, _posY)
+    public LogicalToggle(string _name, int _posX, int _posY, Sprite _sprite, Canvas canvas) : base(_name, _posX, _posY)
     {
         DefaultControls.Resources uiResources = new DefaultControls.Resources();
-        uiResources.checkmark = Main.Instance.checkmark;
+        uiResources.checkmark = _sprite;
         toggle = DefaultControls.CreateToggle(uiResources);
-        toggle.transform.SetParent(Main.Instance.canvas.transform);
+        toggle.transform.SetParent(canvas.transform);
         toggle.transform.localPosition = new Vector2(posX, posY);
         toggle.name = name;
         toggle.GetComponentInChildren<Text>().text = name;

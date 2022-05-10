@@ -13,7 +13,7 @@ public class LogicalNOR : LogicalDoor
     protected override void Calculate()
     {
         // Code here the calculate method of the Logical Component
-
+        exit = entries[1] == 0 && entries[0] == 0 ? 1 : 0;
 
 
         // Keep this line at the end to call the base method

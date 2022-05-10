@@ -12,7 +12,6 @@ public class LogicalNOT : LogicalDoor
 
     protected override void Calculate()
     {
-        // Code here the calculate method of the Logical Component
         // Exits return the contrary of entry
         exit = (entries[0] == 1) ? 0 : 1;
 
